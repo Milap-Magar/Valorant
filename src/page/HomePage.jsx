@@ -1,5 +1,5 @@
 import React, { useState } from "react";
-import { motion } from "framer-motion";
+import { motion, AnimatePresence } from "framer-motion";
 import useAgentDeatils from "../hooks/useAgentDetails";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
@@ -30,7 +30,7 @@ const Home = () => {
     background: `linear-gradient(135deg, #${currentAgent.backgroundGradientColors.join(
       ", #"
     )})`,
-    transition: "background 0.8s ease",
+    transition: "background 1s ease",
   };
 
   return (
@@ -43,8 +43,7 @@ const Home = () => {
       <motion.div
         className="relative flex flex-col items-center md:items-start md:justify-between gap-8 h-full pt-24 pb-4 px-5"
         initial={{ opacity: 0, y: 50 }}
-        whileInView={{ opacity: 1, y: 0 }}
-        viewport={{ once: true }}
+        animate={{ opacity: 1, y: 0 }}
         transition={{ duration: 1 }}
       >
         <div className="w-full h-full text-center md:text-left flex flex-col md:flex-row gap-4">
@@ -58,38 +57,40 @@ const Home = () => {
               boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
               border: "1px solid rgba(255, 255, 255, 0.3)",
             }}
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            <h1 className="text-3xl font-semibold text-slate-900">
-              {currentAgent.displayName}
-            </h1>
-            <h2 className="text-md font-light text-slate-700">
-              {currentAgent.role.displayName}
-            </h2>
-            <span className="font-bold text-slate-700">Description</span>
-            <p className="text-slate-600 font-semibold pt-1">
-              {currentAgent.role.description}
-            </p>
-            <p className="text-slate-600 mt-4">{currentAgent.description}</p>
-            <Link to={`/agents/${currentAgent.uuid}`}>
-              <button className="btn btn-success px-2">Learn More</button>
-            </Link>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentAgent.uuid}
+                initial={{ opacity: 0, y: 20 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -20 }}
+                transition={{ duration: 0.5 }}
+              >
+                <h1 className="text-3xl font-semibold text-slate-900">
+                  {currentAgent.displayName}
+                </h1>
+                <h2 className="text-md font-light text-slate-700">
+                  {currentAgent.role.displayName}
+                </h2>
+                <span className="font-bold text-slate-700">Description</span>
+                <p className="text-slate-600 font-semibold pt-1">
+                  {currentAgent.role.description}
+                </p>
+                <p className="text-slate-600 mt-4">
+                  {currentAgent.description}
+                </p>
+                <Link to={`/agents/${currentAgent.uuid}`}>
+                  <button className="btn btn-success px-2">Learn More</button>
+                </Link>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
 
           {/* Abilities Section */}
-          <motion.div
-            className="w-full md:w-1/4 text-center rounded-2xl flex flex-col gap-4"
-            initial={{ opacity: 0, y: 50 }}
-            whileInView={{ opacity: 1, y: 0 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8, delay: 0.3 }}
-          >
+          <motion.div className="w-full md:w-1/4 text-center rounded-2xl flex flex-col gap-4">
             <ul className="flex flex-col md:flex-row md:flex-wrap gap-5">
               {currentAgent.abilities.map((ability, index) => (
-                <li
+                <motion.li
                   key={index}
                   style={{
                     background: "rgba(255, 255, 255, 0.3)",
@@ -99,17 +100,16 @@ const Home = () => {
                     border: "1px solid rgba(255, 255, 255, 0.3)",
                   }}
                   className="rounded-xl px-2 py-2"
+                  initial={{ scale: 0.8, opacity: 0 }}
+                  animate={{ scale: 1, opacity: 1 }}
+                  transition={{ duration: 0.5, delay: index * 0.2 }}
                 >
-                  <motion.img
+                  <img
                     src={ability.displayIcon}
                     alt={`${currentAgent.displayName}`}
-                    className="w-24 h-auto mx-auto"
-                    initial={{ scale: 0.8, opacity: 0 }}
-                    whileInView={{ scale: 1, opacity: 1 }}
-                    viewport={{ once: true }}
-                    transition={{ duration: 0.5, delay: index * 0.2 }}
+                    className="w-16 h-auto mx-auto"
                   />
-                </li>
+                </motion.li>
               ))}
             </ul>
           </motion.div>
@@ -124,41 +124,37 @@ const Home = () => {
               boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
               border: "1px solid rgba(255, 255, 255, 0.3)",
             }}
-            initial={{ scale: 0.9, opacity: 0 }}
-            whileInView={{ scale: 1, opacity: 1 }}
-            viewport={{ once: true }}
-            transition={{ duration: 0.8 }}
           >
-            <div className="relative w-full h-[90%]">
-              <figure>
-                <img
-                  src={currentAgent.background}
-                  alt={`${currentAgent.displayName}_background`}
-                  className="absolute h-full w-full left-1/2 transform -translate-x-1/2 -translate-y-2 max-w-auto z-0 opacity-[0.7]"
-                />
-                <motion.img
-                  src={currentAgent.fullPortraitV2}
-                  alt={`${currentAgent.displayName}_portrait`}
-                  className="relative z-10 mx-auto w-[70%] md:w-[50%] lg:w-[70%] h-full rounded-lg transition-transform duration-500 ease-in-out transform -translate-y-2 hover:scale-105"
-                  initial={{ y: 50, opacity: 0 }}
-                  whileInView={{ y: 0, opacity: 1 }}
-                  viewport={{ once: true }}
-                  transition={{ duration: 0.8 }}
-                />
-              </figure>
-            </div>
+            <AnimatePresence mode="wait">
+              <motion.div
+                key={currentAgent.uuid}
+                initial={{ opacity: 0, y: 50 }}
+                animate={{ opacity: 1, y: 0 }}
+                exit={{ opacity: 0, y: -50 }}
+                transition={{ duration: 0.8 }}
+              >
+                <div className="relative w-full h-[90%]">
+                  <figure>
+                    <img
+                      src={currentAgent.background}
+                      alt={`${currentAgent.displayName}_background`}
+                      className="absolute h-full w-full left-1/2 transform -translate-x-1/2 -translate-y-2 max-w-auto z-0 opacity-[0.7]"
+                    />
+                    <img
+                      src={currentAgent.fullPortraitV2}
+                      alt={`${currentAgent.displayName}_portrait`}
+                      className="relative z-10 mx-auto w-[70%] md:w-[50%] lg:w-[70%] h-full rounded-lg transition-transform duration-500 ease-in-out transform -translate-y-2 hover:scale-105"
+                    />
+                  </figure>
+                </div>
+              </motion.div>
+            </AnimatePresence>
           </motion.div>
         </div>
       </motion.div>
 
       {/* Agent List */}
-      <motion.div
-        className="w-full h-auto p-5"
-        initial={{ opacity: 0 }}
-        whileInView={{ opacity: 1 }}
-        viewport={{ once: true }}
-        transition={{ duration: 0.8 }}
-      >
+      <motion.div className="w-full h-auto p-5">
         <div
           className="w-full h-auto text-center rounded-2xl"
           style={{
@@ -184,10 +180,6 @@ const Home = () => {
                     : "hover:scale-105 hover:border-2 hover:border-gray-200"
                 }`}
                 onClick={() => handleAgentClick(agent)}
-                initial={{ opacity: 0, scale: 0.8 }}
-                whileInView={{ opacity: 1, scale: 1 }}
-                viewport={{ once: true }}
-                transition={{ duration: 0.5, delay: 0.1 }}
               />
             ))}
           </div>
