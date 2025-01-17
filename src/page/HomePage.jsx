@@ -2,6 +2,7 @@ import React, { useState } from "react";
 import { motion } from "framer-motion";
 import useAgentDeatils from "../hooks/useAgentDetails";
 import Loading from "../components/Loading";
+import { Link } from "react-router-dom";
 
 const Home = () => {
   const { data, isLoading, error } = useAgentDeatils();
@@ -19,7 +20,11 @@ const Home = () => {
     setSelectedAgent(agent);
   };
 
-  const currentAgent = selectedAgent || data[0];
+  const currentAgent = selectedAgent || (data.length > 0 ? data[0] : null);
+
+  if (!currentAgent) {
+    return <div>No agents available at the moment.</div>;
+  }
 
   const gradientStyle = {
     background: `linear-gradient(135deg, #${currentAgent.backgroundGradientColors.join(
@@ -69,9 +74,9 @@ const Home = () => {
               {currentAgent.role.description}
             </p>
             <p className="text-slate-600 mt-4">{currentAgent.description}</p>
-            <button className="btn btn-success mt-2 btn-sm text-slate-200">
-              Learn More
-            </button>
+            <Link to={`/agents/${currentAgent.uuid}`}>
+              <button className="btn btn-success px-2">Learn More</button>
+            </Link>
           </motion.div>
 
           {/* Abilities Section */}

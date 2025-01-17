@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { Layout } from "./components/";
 import { Agents, Home, Weapons } from "./page/";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
-import AgentPage from "./page/AgentDeatails";
+import AgentPage from "./page/AgentDeatails.page";
 
 const App = () => {
   const queryClient = new QueryClient();

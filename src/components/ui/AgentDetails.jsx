@@ -16,10 +16,10 @@ const AgentDetails = ({ agentId }) => {
     <div>
       <h1>Agent Details</h1>
       <p>
-        <strong>ID:</strong> {data.id}
+        <strong>ID:</strong> {data.uuid}
       </p>
       <p>
-        <strong>Name:</strong> {data.name}
+        <strong>Name:</strong> {data.displayName}
       </p>
       <p>
         <strong>Description:</strong> {data.description}
