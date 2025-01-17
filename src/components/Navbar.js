@@ -1,14 +1,38 @@
-import React from "react";
+import React, { useState, useEffect } from "react";
 
 const Navbar = () => {
+  const [isScrolled, setIsScrolled] = useState(false);
+
+  useEffect(() => {
+    const handleScroll = () => {
+      setIsScrolled(window.scrollY > 0);
+    };
+
+    window.addEventListener("scroll", handleScroll);
+
+    return () => {
+      window.removeEventListener("scroll", handleScroll);
+    };
+  }, []);
+
   return (
-    <div className="navbar bg-base-300 px-2 py-1">
+    <div
+      className={`navbar px-2 py-1 fixed top-0 left-0 right-0 z-50 transition-all duration-300 ${
+        isScrolled
+          ? "bg-transparent backdrop-blur-md"
+          : "bg-transparent shadow-md"
+      }`}
+    >
       <div className="navbar-start">
         <div className="dropdown">
-          <div tabIndex={0} role="button" className="btn btn-ghost btn-circle p-1">
+          <div
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost btn-circle p-1"
+          >
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
+              className="h-7 w-7 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
@@ -23,28 +47,36 @@ const Navbar = () => {
           </div>
           <ul
             tabIndex={0}
-            className="menu menu-sm dropdown-content bg-base-100 rounded-box z-[1] mt-2 w-36 p-2 shadow"
+            className="menu menu-sm dropdown-content text-slate-900 bg-white rounded-box z-[1] mt-2 w-36 p-2 shadow"
           >
             <li>
-              <a className="text-sm" href="/">Home</a>
+              <a className="text-sm" href="/">
+                Home
+              </a>
             </li>
             <li>
-              <a className="text-sm" href="agents">Agents</a>
+              <a className="text-sm" href="agents">
+                Agents
+              </a>
             </li>
             <li>
-              <a className="text-sm" href="weapons">Weapons</a>
+              <a className="text-sm" href="weapons">
+                Weapons
+              </a>
             </li>
           </ul>
         </div>
       </div>
       <div className="navbar-center">
-        <a className="btn btn-ghost text-orange-500 text-base" href="/">VALORANT</a>
+        <a className="btn btn-ghost text-lime-200" href="/">
+          VALORANT
+        </a>
       </div>
       <div className="navbar-end">
         <button className="btn btn-ghost btn-circle p-1">
           <svg
             xmlns="http://www.w3.org/2000/svg"
-            className="h-4 w-4"
+            className="h-7 w-7 text-white"
             fill="none"
             viewBox="0 0 24 24"
             stroke="currentColor"
@@ -61,7 +93,7 @@ const Navbar = () => {
           <div className="indicator">
             <svg
               xmlns="http://www.w3.org/2000/svg"
-              className="h-4 w-4"
+              className="h-7 w-7 text-white"
               fill="none"
               viewBox="0 0 24 24"
               stroke="currentColor"
