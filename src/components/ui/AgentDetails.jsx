@@ -30,9 +30,9 @@ const AgentDetails = ({ agentId }) => {
 
       {/* Glassmorphic Container */}
       <motion.div
-        className="absolute left-10 top-12 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-[60vh] flex flex-col items-center justify-center rounded-lgz"
+        className="absolute left-10 top-12 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-96 flex flex-col items-center justify-center rounded-lg"
         style={{
-          background: "rgba(255, 255, 255, 0.3)",
+          background: "rgba(255, 255, 255, 0.1)",
           backdropFilter: "blur(10px)",
           WebkitBackdropFilter: "blur(10px)",
           boxShadow: "0 4px 30px rgba(0, 0, 0, 0.1)",
@@ -44,13 +44,13 @@ const AgentDetails = ({ agentId }) => {
       >
         {/* Grid Layout for Agent Details */}
         <motion.div
-          className="grid grid-cols-1 gap-4 w-full p-6 text-left"
+          className="grid grid-cols-1 gap-4 w-full px-6 py-2 text-left"
           initial="hidden"
           animate="visible"
           variants={{
-            hidden: { opacity: 0, scale: 0.9 },
+            hidden: { opacity: 0, scale: 0.2 },
             visible: {
-              opacity: 1,
+              opacity: 0.8,
               scale: 1,
               transition: {
                 delayChildren: 0.2,
@@ -61,24 +61,44 @@ const AgentDetails = ({ agentId }) => {
         >
           {/* Example Data */}
           <motion.div
-            className="bg-white/50 p-4 rounded-lg shadow-md"
+            className="bg-white/10 p-2 rounded-lg shadow-md flex gap-4 items-center justify-center"
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              visible: { opacity: 0.9, y: 0 },
             }}
           >
-            <h2 className={`font-extrabold`}>{data.displayName}</h2>
+            <img
+              src={data.displayIconSmall}
+              alt="display Icon"
+              className="h-10 w-10"
+            />
+            <h2 className={`font-bold text-2xl text-white`}>
+              {data.displayName}
+            </h2>
           </motion.div>
 
           <motion.div
-            className="bg-white/50 p-4 rounded-lg shadow-md"
+            className="bg-white/30 p-4 rounded-lg shadow-md"
             variants={{
               hidden: { opacity: 0, y: 20 },
-              visible: { opacity: 1, y: 0 },
+              visible: { opacity: 0.9, y: 0 },
             }}
           >
-            <h3 className="text-lg font-bold">Description:</h3>
-            <p>{data.description}</p>
+            <h3 className="text-lg text-white font-bold">Description:</h3>
+            <p className="text-white">{data.description}</p>
+          </motion.div>
+
+          <motion.div
+            className="bg-white/30 p-4 rounded-lg shadow-md flex justify-between px-9"
+            variants={{
+              hidden: { opacity: 0, y: 20 },
+              visible: { opacity: 0.9, y: 0 },
+            }}
+          >
+            <img src={data.abilities[0].displayIcon} alt="" className="h-7 w-7" />
+            <img src={data.abilities[1].displayIcon} alt="" className="h-7 w-7" />
+            <img src={data.abilities[2].displayIcon} alt="" className="h-7 w-7" />
+            <img src={data.abilities[3].displayIcon} alt="" className="h-7 w-7" />
           </motion.div>
 
           {/* Add more fields as needed */}
