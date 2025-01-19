@@ -3,6 +3,7 @@ import { motion, AnimatePresence } from "framer-motion";
 import useAgentDeatils from "../hooks/useAgentDetails";
 import Loading from "../components/Loading";
 import { Link } from "react-router-dom";
+import Slider from "../components/ui/Slider";
 
 const Home = () => {
   const { data, isLoading, error } = useAgentDeatils();
@@ -185,6 +186,7 @@ const Home = () => {
           </div>
         </div>
       </motion.div>
+      <Slider />
     </motion.div>
   );
 };
