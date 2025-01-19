@@ -30,7 +30,7 @@ const AgentDetails = ({ agentId }) => {
       {/* Glassmorphic Container */}
       <div>
         <motion.div
-          className="absolute left-10 top-12 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-96 flex flex-col items-center justify-center rounded-lg"
+          className="absolute left-1 md:left-10 lg:left-12 xl:left-14 top-12 transform -translate-x-1/2 -translate-y-1/2 w-[400px] h-96 flex flex-col items-center justify-center rounded-lg"
           style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(10px)",
@@ -122,7 +122,7 @@ const AgentDetails = ({ agentId }) => {
         </motion.div>
 
         <motion.div
-          className="absolute right-10 top-12 transform -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[700px] h-96 flex flex-col items-center justify-center rounded-lg"
+          className="absolute right-10 top-12 transform -translate-x-1/2 -translate-y-1/2 w-[300px] md:w-[700px] h-96 hidden lg:flex xl:flex md:flex flex-col items-center justify-center rounded-lg"
           style={{
             background: "rgba(255, 255, 255, 0.1)",
             backdropFilter: "blur(10px)",
@@ -151,62 +151,93 @@ const AgentDetails = ({ agentId }) => {
               },
             }}
           >
-            {/* Example Data */}
             <motion.div
-              className="bg-white/30 p-2 rounded-lg shadow-md flex gap-2 items-center justify-center w-[150px]"
+              className="bg-white/40 p-2 rounded-lg shadow-md flex gap-2 items-center justify-center w-[180px]"
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 0.9, y: 0 },
+                visible: { opacity: 1, y: 0 },
               }}
             >
               <img
                 src={data.role.displayIcon}
                 alt="display Icon"
-                className="h-7 w-7"
+                className="h-7 w-7 "
               />
-              <h2 className={`font-bold text-2xl text-white`}>
+              <h2 className={`font-bold text-2xl text-slate-950`}>
                 {data.role.displayName}
               </h2>
             </motion.div>
 
             <motion.div
-              className="bg-white/30 p-4 rounded-lg shadow-md"
+              className="bg-white/40 p-4 rounded-lg shadow-md"
               variants={{
                 hidden: { opacity: 0, y: 20 },
-                visible: { opacity: 0.9, y: 0 },
+                visible: { opacity: 1, y: 0 },
               }}
             >
-              <h3 className="text-lg text-white font-bold">Description:</h3>
-              <p className="text-white">{data.description}</p>
+              <h3 className="text-lg text-white font-bold">Deatils :</h3>
+              <p className="text-slate-950">{data.role.description}</p>
             </motion.div>
 
             <motion.div
-              className="bg-white/30 p-4 rounded-lg shadow-md flex justify-between px-9"
+              className="bg-white/40 p-4 rounded-lg shadow-md flex justify-between px-4 text-center"
               variants={{
                 hidden: { opacity: 0, y: 20 },
                 visible: { opacity: 0.9, y: 0 },
               }}
             >
-              <img
-                src={data.abilities[0].displayIcon}
-                alt=""
-                className="h-7 w-7"
-              />
-              <img
-                src={data.abilities[1].displayIcon}
-                alt=""
-                className="h-7 w-7"
-              />
-              <img
-                src={data.abilities[2].displayIcon}
-                alt=""
-                className="h-7 w-7"
-              />
-              <img
-                src={data.abilities[3].displayIcon}
-                alt=""
-                className="h-7 w-7"
-              />
+              <figure className="flex flex-col  justify-center items-center w-[150px] text-xs">
+                <img
+                  src={data.abilities[0].displayIcon}
+                  alt=""
+                  className="h-7 w-7"
+                />
+                <h3 className="text-lg font-black text-black">
+                  {data.abilities[0].displayName}
+                </h3>
+                <h3 className="text-slate-950 max-h-14 overflow-auto ">
+                  {data.abilities[0].description}
+                </h3>
+              </figure>
+              <figure className="flex flex-col  justify-center items-center w-[150px] text-xs">
+                <img
+                  src={data.abilities[1].displayIcon}
+                  alt=""
+                  className="h-7 w-7"
+                />
+                <h3 className="text-lg font-black text-black">
+                  {data.abilities[1].displayName}
+                </h3>
+                <h3 className="text-slate-950 max-h-14 overflow-auto ">
+                  {data.abilities[1].description}
+                </h3>
+              </figure>
+              <figure className="flex flex-col  justify-center items-center w-[150px] text-xs">
+                <img
+                  src={data.abilities[2].displayIcon}
+                  alt=""
+                  className="h-7 w-7"
+                />
+                <h3 className="text-lg font-black text-black">
+                  {data.abilities[2].displayName}
+                </h3>
+                <h3 className="text-slate-950 max-h-14 overflow-auto ">
+                  {data.abilities[2].description}
+                </h3>
+              </figure>
+              <figure className="flex flex-col  justify-center items-center w-[150px] text-xs">
+                <img
+                  src={data.abilities[3].displayIcon}
+                  alt=""
+                  className="h-7 w-7"
+                />
+                <h3 className="text-lg font-black text-black">
+                  {data.abilities[3].displayName}
+                </h3>
+                <h3 className="text-slate-950 max-h-14 overflow-auto ">
+                  {data.abilities[3].description}
+                </h3>
+              </figure>
             </motion.div>
 
             {/* Add more fields as needed */}
