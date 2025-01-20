@@ -3,7 +3,7 @@ import { Route, BrowserRouter as Router, Routes } from "react-router-dom";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";
 
 import { Layout } from "./components/";
-import { Agents, Home, Weapons } from "./page/";
+import { AgentList, Home, Weapons } from "./page/";
 
 import AgentPage from "./page/AgentDeatails.page";
 import WeaponsDetailsPage from "./page/WeaponsDetails.page";
@@ -20,7 +20,7 @@ const App = () => {
             <Route index element={<Home />} />
             {/* Secondary Page */}
             <Route path="weapons" element={<Weapons />} />
-            <Route path="agents" element={<Agents />} />
+            <Route path="agents" element={<AgentList />} />
             {/* Details Page */}
             <Route path="agents/:id" element={<AgentPage />} />
             <Route path="weapons/:id" element={<WeaponsDetailsPage />} />
