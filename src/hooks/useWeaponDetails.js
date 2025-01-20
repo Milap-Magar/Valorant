@@ -1,12 +1,13 @@
 import axios from "axios";
-import { useEffect, useState } from "react";
+import { useEffect } from "react";
+import { useState } from "react";
 
-const useAgentDeatils = () => {
+const useWeaponsDetails = ( weaponsId ) => {
   const [data, setData] = useState([]);
   const [isLoading, setIsLoading] = useState(true);
   const [error, setError] = useState(null);
 
-  const url = "https://valorant-api.com/v1/agents";
+  const url = `https://valorant-api.com/v1/weapons/${weaponsId}`;
 
   useEffect(() => {
     const fetchData = async () => {
@@ -24,4 +25,4 @@ const useAgentDeatils = () => {
   return { data, isLoading, error };
 };
 
-export default useAgentDeatils;
+export default useWeaponsDetails;

@@ -17,9 +17,9 @@ const AgentDetails = ({ agentId }) => {
   }
 
   return (
-    <div className="w-full bg-white text-black h-screen mt-16 text-center relative">
+    <div className="w-full text-black h-screen mt-16 text-center relative">
       {/* Background Image */}
-      <figure className="w-full h-screen">
+      <figure className="w-full h-screen absolute">
         <img
           src={bg_valo}
           alt="Background"

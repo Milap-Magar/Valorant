@@ -3,7 +3,7 @@ import logo from "../assets/valo.svg";
 
 const Footer = () => {
   return (
-    <div className="min-w-full h-[50px]">
+    <div className="min-w-full h-[50px] ">
       <footer className="bg-transparent text-neutral-content items-center p-4 flex justify-between">
         <aside className="grid-flow-col items-center flex">
           <img src={logo} alt="valorant logo" className="h-16 w-16" />
