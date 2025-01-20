@@ -1,0 +1,19 @@
+{
+  "files": {
+    "main.css": "/Valorant/static/css/main.51728852.css",
+    "main.js": "/Valorant/static/js/main.7ee44e07.js",
+    "static/js/722.0db64a8a.chunk.js": "/Valorant/static/js/722.0db64a8a.chunk.js",
+    "static/media/weapon_gb.jpg": "/Valorant/static/media/weapon_gb.29be8f258f38096d4564.jpg",
+    "static/media/valo_bg.jpg": "/Valorant/static/media/valo_bg.47751bfc349719abf666.jpg",
+    "static/media/backgorund_valo.jpg": "/Valorant/static/media/backgorund_valo.9631463b8874fa1017da.jpg",
+    "static/media/valo.svg": "/Valorant/static/media/valo.e2987ed32a23a30fe3845c007a07135a.svg",
+    "index.html": "/Valorant/index.html",
+    "main.51728852.css.map": "/Valorant/static/css/main.51728852.css.map",
+    "main.7ee44e07.js.map": "/Valorant/static/js/main.7ee44e07.js.map",
+    "722.0db64a8a.chunk.js.map": "/Valorant/static/js/722.0db64a8a.chunk.js.map"
+  },
+  "entrypoints": [
+    "static/css/main.51728852.css",
+    "static/js/main.7ee44e07.js"
+  ]
+}
