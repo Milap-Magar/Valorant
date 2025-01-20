@@ -55,12 +55,12 @@ const Navbar = () => {
               </a>
             </li>
             <li>
-              <a className="text-sm" href="agents">
+              <a className="text-sm" href="/agents">
                 Agents
               </a>
             </li>
             <li>
-              <a className="text-sm" href="weapons">
+              <a className="text-sm" href="/weapons">
                 Weapons
               </a>
             </li>

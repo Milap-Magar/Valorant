@@ -14,6 +14,7 @@ const WeaponsDetails = () => {
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
   const [currentIndex, setCurrentIndex] = useState(0);
+  const [isModalOpen, setIsModalOpen] = useState(false); // Modal state
 
   useEffect(() => {
     const fetchWeapons = async () => {
@@ -57,6 +58,7 @@ const WeaponsDetails = () => {
 
   return (
     <div className="w-full min-h-full py-16 flex flex-col items-center px-4 md:px-16 lg:px-32">
+      {/* Background Image */}
       <figure
         className="w-full h-full absolute top-0 left-0 z-0"
         style={{
@@ -67,15 +69,16 @@ const WeaponsDetails = () => {
       ></figure>
       <div className="z-10">
         <h1 className="font-mono text-white">
-          / Weapons / {weaponDetails.displayName}{" "}
+          / Weapons / {weaponDetails.displayName}
         </h1>
       </div>
       <h1 className="text-4xl font-bold mb-6 text-center text-gray-200 z-10">
         {weaponSkins[currentIndex]?.displayName}
       </h1>
 
+      {/* Image Slider */}
       <div className="relative flex items-center justify-center w-full h-full">
-        {/* Previous Image (smaller) */}
+        {/* Previous Image */}
         <div
           className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] flex items-center justify-center overflow-hidden bg-slate-200 shadow-lg rounded-lg cursor-pointer relative"
           onClick={() => setCurrentIndex(getPrevIndex(currentIndex))}
@@ -90,7 +93,7 @@ const WeaponsDetails = () => {
                     ?.fullRender || ""
                 }
                 alt="Previous Weapon Skin"
-                className="w-full h-full object-contain blur    "
+                className="w-full h-full object-contain blur"
                 initial={{ opacity: 0, scale: 0.8 }}
                 animate={{ opacity: 1, scale: 1 }}
                 exit={{ opacity: 0, scale: 0.8 }}
@@ -100,10 +103,10 @@ const WeaponsDetails = () => {
           )}
         </div>
 
-        {/* Current Image (largest) */}
+        {/* Current Image */}
         <div
           onClick={handleImageClick}
-          className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex items-center justify-center overflow-hidden bg-slate-200 shadow-lg rounded-lg cursor-pointer "
+          className="w-[300px] h-[300px] md:w-[400px] md:h-[400px] flex items-center justify-center overflow-hidden bg-slate-200 shadow-lg rounded-lg cursor-pointer"
         >
           {weaponSkins[currentIndex]?.chromas[0]?.fullRender && (
             <AnimatePresence>
@@ -121,7 +124,7 @@ const WeaponsDetails = () => {
           )}
         </div>
 
-        {/* Next Image (smaller) */}
+        {/* Next Image */}
         <div
           className="w-[150px] h-[150px] md:w-[200px] md:h-[200px] flex items-center justify-center overflow-hidden bg-slate-200 shadow-lg rounded-lg cursor-pointer relative"
           onClick={() => setCurrentIndex(getNextIndex(currentIndex))}
@@ -146,52 +149,47 @@ const WeaponsDetails = () => {
           )}
         </div>
       </div>
-
-      <main className="flex flex-col my-4 py-10 px-6 w-full max-w-xl bg-opacity-70 backdrop-blur-lg bg-slate-100 rounded-lg shadow-lg">
-        <motion.div
-          className="p-6 text-center text-gray-900"
-          initial={{ opacity: 0, y: 50 }}
-          animate={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          <h2 className="text-3xl font-bold mb-4">
-            Weapon: <span className=""> {weaponDetails.displayName}</span>
-          </h2>
-          <p className="text-lg text-gray-700">
-            Category:{" "}
-            <span className="text-gray-500 font-semibold">
-              {weaponDetails.category.replace("EEquippableCategory::", "")}
-            </span>
-          </p>
-          <p className="text-lg text-gray-700 mt-2">
-            Fire Rate:{" "}
-            <span className="text-gray-500 font-semibold">
-              {weaponDetails.weaponStats?.fireRate} Rounds/Second
-            </span>
-          </p>
-          <p className="text-lg text-gray-700 mt-2">
-            Magazine Size:{" "}
-            <span className="text-gray-500 font-semibold">
-              {weaponDetails.weaponStats?.magazineSize} Rounds
-            </span>
-          </p>
-          <p className="text-lg text-gray-700 mt-2">
-            Reload Time:{" "}
-            <span className="text-gray-500 font-semibold">
-              {weaponDetails.weaponStats?.reloadTimeSeconds} Seconds
-            </span>
-          </p>
-          <p className="text-lg text-gray-700 mt-2">
-            Wall Penetration:{" "}
-            <span className="text-gray-500 font-semibold">
+      {/* Modal Trigger Button */}
+      <button
+        onClick={() => setIsModalOpen(true)}
+        className="mt-6 py-2 px-6 bg-blue-600 text-white font-semibold rounded-lg"
+      >
+        Show Weapon Details
+      </button>
+      {/* Modal Component */}
+      {isModalOpen && (
+        <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-20">
+          <div className="bg-white p-6 rounded-lg shadow-lg w-96">
+            <h2 className="text-2xl font-bold mb-4">
+              Weapon: {weaponDetails.displayName}
+            </h2>
+            <p>Category: {weaponDetails.category}</p>
+            <p>
+              Fire Rate: {weaponDetails.weaponStats?.fireRate} Rounds/Second
+            </p>
+            <p>
+              Magazine Size: {weaponDetails.weaponStats?.magazineSize} Rounds
+            </p>
+            <p>
+              Reload Time: {weaponDetails.weaponStats?.reloadTimeSeconds}{" "}
+              Seconds
+            </p>
+            <p>
+              Wall Penetration:{" "}
               {weaponDetails.weaponStats?.wallPenetration.replace(
                 "EWallPenetrationDisplayType::",
                 ""
               )}
-            </span>
-          </p>
-        </motion.div>
-      </main>
+            </p>
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="mt-4 py-2 px-6 bg-red-600 text-white font-semibold rounded-lg"
+            >
+              Close
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   );
 };
